@@ -15,20 +15,24 @@ struct ContentView: View {
      
     var body: some View {
         NavigationView {
-            List(expense.expenseItems) { expenseItem in
-                NavigationLink {
-                    //DetailView()
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(expenseItem.name).font(.headline)
-                            Text(expenseItem.type)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+            List {
+                ForEach(expense.expenseItems){ expenseItem in
+                    NavigationLink {
+                        //DetailView()
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(expenseItem.name).font(.headline)
+                                Text(expenseItem.type)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                            Spacer()
+                            Text(expenseItem.price)
                         }
-                        Spacer()
-                        Text(expenseItem.price)
                     }
+                }.onDelete { indexSet in
+                    expense.deleteItem(indexSet: indexSet)
                 }
             }
             .navigationTitle("账单")

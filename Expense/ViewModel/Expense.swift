@@ -17,4 +17,8 @@ class Expense: ObservableObject {
     func addItem(item: ExpenseItem) {
         expenseItems.append(item)
     }
+    
+    func deleteItem(indexSet:IndexSet) {
+        expenseItems.remove(atOffsets: indexSet)
+    }
 }
