@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     
+    //private属性
     private let types = ["日用百货", "餐饮美食", "数码电器", "教育培训", "充值缴费"]
     
     @State private var name = ""
@@ -16,9 +17,12 @@ struct DetailView: View {
     @State private var price = ""
     @Environment(\.dismiss) var dismiss
     
+    //可以被传过来的数据
     @ObservedObject var expense: Expense
+    var expenseItem: ExpenseItem?
     
-    //@Binding var expenseItems: [ExpenseItem]
+    //计算属性
+    var isAddingPage: Bool {expenseItem == nil} //是否是新增
     
     var body: some View {
         
@@ -40,7 +44,7 @@ struct DetailView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("添加账单")
+            .navigationTitle(isAddingPage ? "添加账单" : "编辑账单")
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -53,7 +57,11 @@ struct DetailView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        expense.addItem(item: ExpenseItem(name: name, type: type, price: price))
+                        if isAddingPage {
+                            expense.addItem(item: ExpenseItem(name: name, type: type, price: price))
+                        } else {
+                            //TODO edit
+                        }
                         dismiss()
                     } label: {
                         Text("保存").foregroundColor(.primary)
@@ -65,8 +73,8 @@ struct DetailView: View {
     }
 }
 
-//struct DetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailView()
-//    }
-//}
+struct DetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailView(expense: Expense(), expenseItem: ExpenseItem(name: "IOS课程", type: "教育培训", price: "800"))
+    }
+}
