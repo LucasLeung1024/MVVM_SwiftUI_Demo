@@ -18,7 +18,7 @@ struct ContentView: View {
             List {
                 ForEach(expense.expenseItems){ expenseItem in
                     NavigationLink {
-//                        DetailView(expense: expense, expenseItem: expense.expenseItems)
+                        DetailView(expense: expense)
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {

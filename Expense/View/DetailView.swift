@@ -23,16 +23,20 @@ struct DetailView: View {
     
     //计算属性
     var isAddingPage: Bool {expenseItem == nil} //是否是新增
+    var expenseItemIndex: Int? {
+        //循环数组，比对ID来找出index
+        expense.expenseItems.firstIndex { $0.id == self.expenseItem?.id}
+    }
     
     var body: some View {
         
        // NavigationView {
             Form {
                 Section("账单名") {
-                    TextField("收入或支出来源", text: $name)
+                    TextField("收入或支出来源", text: isAddingPage ? $name : $expense.expenseItems[expenseItemIndex!].name)
                 }
                 Section("账单分类") {
-                    Picker("选择一个分类", selection: $type) {
+                    Picker("选择一个分类", selection: isAddingPage ? $type : $expense.expenseItems[expenseItemIndex!].type) {
                         ForEach(types, id: \.self) {
                             Text($0)
                         }
