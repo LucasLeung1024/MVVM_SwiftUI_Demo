@@ -64,7 +64,8 @@ struct DetailView: View {
                         if isAddingPage {
                             expense.addItem(item: ExpenseItem(name: name, type: type, price: price))
                         } else {
-                            //TODO edit
+                            //edit
+                            expense.editItem()
                         }
                         dismiss()
                     } label: {

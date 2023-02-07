@@ -8,7 +8,8 @@
 import Foundation
 
 class Expense: ObservableObject {
-    @Published var expenseItems = [
+    @Published
+    var expenseItems = [
         ExpenseItem(name: "IOS课程", type: "教育培训", price: "800"),
         ExpenseItem(name: "MACmini", type: "数码电器", price: "15000"),
         ExpenseItem(name: "iPhone14", type: "数码电器", price: "6000")
@@ -16,9 +17,15 @@ class Expense: ObservableObject {
     
     func addItem(item: ExpenseItem) {
         expenseItems.append(item)
+       // objectWillChange.send()  //手动刷新
     }
     
     func deleteItem(indexSet:IndexSet) {
         expenseItems.remove(atOffsets: indexSet)
+      //  objectWillChange.send()
+    }
+    
+    func editItem() {
+       // objectWillChange.send()
     }
 }
