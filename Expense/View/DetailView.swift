@@ -40,10 +40,10 @@ struct DetailView: View {
                         ForEach(types, id: \.self) {
                             Text($0)
                         }
-                    }.pickerStyle(.navigationLink)
+                    }
                 }
                 Section("账单金额") {
-                    TextField("收入或支出多少", text: $price)
+                    TextField("收入或支出多少", text: isAddingPage ? $price : $expense.expenseItems[expenseItemIndex!].price)
                         .keyboardType(.numberPad)
                 }
             }
