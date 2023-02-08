@@ -38,7 +38,7 @@ struct ContentView: View {
             .navigationTitle("账单")
             .toolbar {
                 NavigationLink {
-                    DetailView(expense: expense)
+                    AddView(expense: expense)
                 } label: {
                     Image(systemName: "plus")
                         .foregroundColor(.secondary)
