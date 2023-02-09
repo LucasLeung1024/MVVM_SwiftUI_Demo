@@ -15,29 +15,25 @@ struct EditView: View {
     
     //可以被传过来的数据
     @ObservedObject var expense: Expense
-    var expenseItem: ExpenseItem
+    @ObservedObject var draftExpenseItem: DraftExpenseItem
     
     //计算属性
-    var expenseItemIndex: Int {
-        //循环数组，比对ID来找出index
-        expense.expenseItems.firstIndex { $0.id == self.expenseItem.id}!
-    }
     
     var body: some View {
         // NavigationView {
              Form {
                  Section("账单名") {
-                     TextField("收入或支出来源", text: $expense.expenseItems[expenseItemIndex].name)
+                     TextField("收入或支出来源", text: $draftExpenseItem.name)
                  }
                  Section("账单分类") {
-                     Picker("选择一个分类", selection: $expense.expenseItems[expenseItemIndex].type) {
+                     Picker("选择一个分类", selection: $draftExpenseItem.type) {
                          ForEach(types, id: \.self) {
                              Text($0)
                          }
                      }
                  }
                  Section("账单金额") {
-                     TextField("收入或支出多少", text: $expense.expenseItems[expenseItemIndex].price)
+                     TextField("收入或支出多少", text: $draftExpenseItem.price)
                          .keyboardType(.numberPad)
                  }
              }
@@ -55,8 +51,8 @@ struct EditView: View {
                  }
                  ToolbarItem(placement: .navigationBarTrailing) {
                      Button {
-                         expense.editItem()
-                         dismiss()
+                         expense.editItem(draftItem: draftExpenseItem)
+                         dismiss()  //同时具备pop
                      } label: {
                          Text("保存").foregroundColor(.primary)
                              .padding(.horizontal)
@@ -67,8 +63,8 @@ struct EditView: View {
     
 }
 
-struct EditView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditView(expense: Expense(), expenseItem: ExpenseItem(name: "test", type: "test", price: "100"))
-    }
-}
+//struct EditView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditView(expense: Expense(), expenseItem: ExpenseItem(name: "test", type: "test", price: "100"))
+//    }
+//}

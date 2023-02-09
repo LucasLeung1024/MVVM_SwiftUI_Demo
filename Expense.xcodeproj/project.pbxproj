@@ -14,6 +14,7 @@
 		07015A1629874636003AC3D4 /* ExpenseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07015A1529874636003AC3D4 /* ExpenseItem.swift */; };
 		0783B877299309B3002FA6E5 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783B876299309B3002FA6E5 /* AddView.swift */; };
 		0783B879299309BE002FA6E5 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783B878299309BE002FA6E5 /* EditView.swift */; };
+		0783B87B299330E6002FA6E5 /* DraftExpenseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0783B87A299330E6002FA6E5 /* DraftExpenseItem.swift */; };
 		07D7DFBA298CB56400B7E305 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7DFB9298CB56400B7E305 /* Expense.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		07015A1529874636003AC3D4 /* ExpenseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseItem.swift; sourceTree = "<group>"; };
 		0783B876299309B3002FA6E5 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		0783B878299309BE002FA6E5 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		0783B87A299330E6002FA6E5 /* DraftExpenseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftExpenseItem.swift; sourceTree = "<group>"; };
 		07D7DFB9298CB56400B7E305 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				07D7DFB9298CB56400B7E305 /* Expense.swift */,
+				0783B87A299330E6002FA6E5 /* DraftExpenseItem.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				07015A0A2987460B003AC3D4 /* ContentView.swift in Sources */,
 				0783B877299309B3002FA6E5 /* AddView.swift in Sources */,
 				07015A1629874636003AC3D4 /* ExpenseItem.swift in Sources */,
+				0783B87B299330E6002FA6E5 /* DraftExpenseItem.swift in Sources */,
 				0783B879299309BE002FA6E5 /* EditView.swift in Sources */,
 				07015A082987460B003AC3D4 /* ExpenseApp.swift in Sources */,
 				07D7DFBA298CB56400B7E305 /* Expense.swift in Sources */,
