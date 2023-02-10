@@ -43,6 +43,7 @@ struct EditView: View {
              .toolbar {
                  ToolbarItem(placement: .navigationBarLeading) {
                      Button {
+                         expense.updateHomeUI()
                          dismiss()
                      } label: {
                          Image(systemName: "arrow.left").foregroundColor(.primary)

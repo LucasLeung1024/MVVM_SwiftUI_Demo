@@ -31,4 +31,8 @@ class Expense: ObservableObject {
         expenseItems[index] = expenseItem
        // objectWillChange.send()
     }
+    
+    func updateHomeUI(){
+        objectWillChange.send()
+    }
 }
