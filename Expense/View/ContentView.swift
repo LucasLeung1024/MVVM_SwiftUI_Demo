@@ -8,31 +8,48 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isUread = true
     
     //@State private var showDetailView = false
     
     @StateObject var expense = Expense()
-     
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(expense.expenseItems){ expenseItem in
-                    NavigationLink { 
-                        EditView(expense: expense, draftExpenseItem: DraftExpenseItem(expenseItem))
-                    } label: {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(expenseItem.name).font(.headline)
-                                Text(expenseItem.type)
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            Text(expenseItem.price)
+            List(expense.expenseItems) { expenseItem in
+                NavigationLink {
+                    EditView(expense: expense, draftExpenseItem: DraftExpenseItem(expenseItem))
+                } label: {
+                    ExpenseItemView(expenseItem: expenseItem)
+                }
+                //edge:左滑还是右滑
+                .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                    Button{
+                        print("切换未读已读")
+                    }label: {
+                        if isUread {
+                            Label("标记为已读", systemImage: "envelope.open")
+                            //Image(systemName: "envelope.open")
+                        } else {
+                            Label("标记为未读", systemImage: "envelope.badge")
+                            //Image(systemName: "envelope.badge")
                         }
                     }
-                }.onDelete { indexSet in
-                    expense.deleteItem(indexSet: indexSet)
+                    .tint(.blue)
+                }
+                .swipeActions {
+                    Button(role: .destructive) {
+                        expense.deleteItem(item: expenseItem)
+                    } label: {
+                        Label("删除账单", systemImage: "trash")
+                    }
+                    Button {
+                        print("flag bill")
+                    } label: {
+                        Label("标记账单", systemImage: "flag")
+                    }
+                    .tint(.orange)
+
                 }
             }
             .navigationTitle("账单")
@@ -44,14 +61,15 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                 }.padding(.horizontal)
             }
+
         }
         .navigationViewStyle(.stack)
-//        .sheet(isPresented: $showDetailView) {
-//            DetailView()
-//        }
-//        .fullScreenCover(isPresented: $showDetailView) {
-//            DetailView()
-//        }
+        //        .sheet(isPresented: $showDetailView) {
+        //            DetailView()
+        //        }
+        //        .fullScreenCover(isPresented: $showDetailView) {
+        //            DetailView()
+        //        }
     }
 }
 

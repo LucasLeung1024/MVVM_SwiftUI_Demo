@@ -25,6 +25,11 @@ class Expense: ObservableObject {
       //  objectWillChange.send()
     }
     
+    func deleteItem(item:ExpenseItem) {
+        let index = expenseItems.firstIndex{ $0.id == item.id }! //比对找到账单
+        expenseItems.remove(at: index)
+    }
+    
     func editItem(draftItem: DraftExpenseItem) {
         let index = expenseItems.firstIndex{ $0.id == draftItem.id }! //比对找到账单
         let expenseItem = ExpenseItem(name: draftItem.name, type: draftItem.type, price: draftItem.price)
