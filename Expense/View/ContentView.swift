@@ -11,14 +11,13 @@ struct ContentView: View {
     @State private var isUread = true
     
     //@State private var showDetailView = false
-    
-    @StateObject var expense = Expense()
+    @EnvironmentObject var expense: Expense
     
     var body: some View {
         NavigationView {
             List(expense.expenseItems) { expenseItem in
                 NavigationLink {
-                    EditView(expense: expense, draftExpenseItem: DraftExpenseItem(expenseItem))
+                    EditView(draftExpenseItem: DraftExpenseItem(expenseItem))
                 } label: {
                     ExpenseItemView(expenseItem: expenseItem)
                 }
@@ -55,7 +54,8 @@ struct ContentView: View {
             .navigationTitle("账单")
             .toolbar {
                 NavigationLink {
-                    AddView(expense: expense)
+                    //AddView(expense: expense)
+                    AddView()
                 } label: {
                     Image(systemName: "plus")
                         .foregroundColor(.secondary)

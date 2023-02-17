@@ -14,7 +14,8 @@ struct EditView: View {
     @Environment(\.dismiss) var dismiss
     
     //可以被传过来的数据
-    @ObservedObject var expense: Expense
+    //@ObservedObject var expense: Expense
+    @EnvironmentObject var expense: Expense
     @ObservedObject var draftExpenseItem: DraftExpenseItem
     
     //计算属性

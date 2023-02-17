@@ -18,7 +18,8 @@ struct AddView: View {
     @Environment(\.dismiss) var dismiss
     
     //可以被传过来的数据
-    @ObservedObject var expense: Expense
+    //@ObservedObject var expense: Expense
+    @EnvironmentObject var expense: Expense
     
     var body: some View {
         // NavigationView {
@@ -66,6 +67,7 @@ struct AddView: View {
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddView(expense: Expense())
+        //AddView(expense: Expense())
+        AddView()
     }
 }
