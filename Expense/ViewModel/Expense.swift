@@ -7,6 +7,8 @@
 
 import Foundation
 
+let kExpenseItemKey = "ExpenseItemsKey"
+
 class Expense: ObservableObject {
     @Published
     var expenseItems = [
@@ -18,6 +20,7 @@ class Expense: ObservableObject {
     func addItem(item: ExpenseItem) {
         expenseItems.append(item)
        // objectWillChange.send()  //手动刷新
+        saveDataToUserDefaults()
     }
     
     func deleteItem(indexSet:IndexSet) {
@@ -28,6 +31,7 @@ class Expense: ObservableObject {
     func deleteItem(item:ExpenseItem) {
         let index = expenseItems.firstIndex{ $0.id == item.id }! //比对找到账单
         expenseItems.remove(at: index)
+        saveDataToUserDefaults()
     }
     
     func editItem(draftItem: DraftExpenseItem) {
@@ -35,9 +39,23 @@ class Expense: ObservableObject {
         let expenseItem = ExpenseItem(name: draftItem.name, type: draftItem.type, price: draftItem.price)
         expenseItems[index] = expenseItem
        // objectWillChange.send()
+        
+        saveDataToUserDefaults()
     }
     
     func updateHomeUI(){
-        objectWillChange.send()
+        objectWillChange.send()//手动刷新
+    }
+}
+
+
+extension Expense {
+    func saveDataToUserDefaults(){
+        do {
+            let data = try JSONEncoder().encode(expenseItems)
+            UserDefaults.standard.set(data, forKey: kExpenseItemKey)
+        } catch {
+            print("编码错误：\(error)")
+        }
     }
 }
