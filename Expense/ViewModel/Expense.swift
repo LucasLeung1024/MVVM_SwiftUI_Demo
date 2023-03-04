@@ -17,6 +17,17 @@ class Expense: ObservableObject {
         ExpenseItem(name: "iPhone14", type: "数码电器", price: "6000")
     ]
     
+    init() {
+        print(NSHomeDirectory())
+        if let data = UserDefaults.standard.data(forKey: kExpenseItemKey){
+            if let expenseItems = try? JSONDecoder().decode([ExpenseItem].self, from: data){
+                self.expenseItems = expenseItems
+            } else {
+                print("解码失败")
+            }
+        }
+    }
+    
     func addItem(item: ExpenseItem) {
         expenseItems.append(item)
        // objectWillChange.send()  //手动刷新
